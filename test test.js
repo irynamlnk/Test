@@ -4,3 +4,12 @@ module.exports = async function minimizedActionWithoutProject({ driverBuilder })
         MyActions.getActionByTitle(ACTIONS.approvalNote),
         ActionModal.minimizeAction
     );
+    await driverBuilder.performActionAndCheckResult(
+        ActionModal.minimizeAction,
+        MyActions.minimizedActionByTitle(ACTIONS.approvalNote)
+    );
+    await driverBuilder.performActionAndCheckResult(
+        LeftPanel.projectsNavigator,
+        ProjectNavigator.getProjectByName(PROJECTS.status.name),
+        { waitLocatedRetries: 2 }
+    );
